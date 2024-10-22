@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fraud Detection System</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="card shadow-lg p-4">
+            <h1 class="text-center mb-4">Fraud Detection System</h1>
+            <p class="text-center lead">Enter transaction details to predict whether the transaction is fraudulent.</p>
+
+            <form method="POST" action="/predict">
+                <!-- Transaction Amount -->
+                <div class="mb-3">
+                    <label for="transaction_amount" class="form-label">Transaction Amount ($)</label>
+                    <input type="number" class="form-control" id="transaction_amount" name="transaction_amount" placeholder="Enter transaction amount" required>
+                </div>
+                <!-- Transaction Time -->
+                <div class="mb-3">
+                    <label for="transaction_time" class="form-label">Transaction Time (HH:MM)</label>
+                    <input type="text" class="form-control" id="transaction_time" name="transaction_time" placeholder="Enter time of transaction" required>
+                </div>
+                <!-- Location -->
+                <div class="mb-3">
+                    <label for="location" class="form-label">Location</label>
+                    <input type="text" class="form-control" id="location" name="location" placeholder="Enter transaction location" required>
+                </div>
+                <!-- Payment Method Dropdown -->
+                <div class="mb-3">
+                    <label for="payment_method" class="form-label">Payment Method</label>
+                    <select class="form-select" id="payment_method" name="payment_method" required>
+                        <option value="credit_card">Credit Card</option>
+                        <option value="debit_card">Debit Card</option>
+                        <option value="paypal">PayPal</option>
+                        <option value="bank_transfer">Bank Transfer</option>
+                    </select>
+                </div>
+                <!-- Submit Button -->
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary btn-lg">Submit Transaction</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS (optional for interaction like tooltips) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Optional: Real-time input validation or interaction -->
+    <script>
+        document.getElementById('transaction_time').addEventListener('input', function (e) {
+            var timeValue = e.target.value;
+            if (timeValue.length == 2) {
+                e.target.value = timeValue + ":";
+            }
+        });
+    </script>
+</body>
+</html>
